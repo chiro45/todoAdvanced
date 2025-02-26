@@ -1,0 +1,28 @@
+{
+  "tareas": [
+    {
+      "id": "2025-02-26T16:08:03.918Z",
+      "titulo": "Nueva tarea",
+      "descripcion": "Descripción opcional1",
+      "estado": "pendiente",
+      "fechaLimite": "2024-03-10",
+      "orden": 0
+    },
+    {
+      "id": "2025-02-26T16:08:04.244Z",
+      "titulo": "Nueva tarea",
+      "descripcion": "Descripción opcional2",
+      "estado": "pendiente",
+      "fechaLimite": "2024-03-10",
+      "orden": 1
+    },
+    {
+      "id": "2025-02-26T16:08:04.616Z",
+      "titulo": "Nueva tarea",
+      "descripcion": "Descripción opcional3",
+      "estado": "en_progreso",
+      "fechaLimite": "2024-03-10",
+      "orden": 1
+    }
+  ]
+}
