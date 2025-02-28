@@ -1,11 +1,11 @@
 import { create } from "zustand";
-import { ITodo } from "../types/ITodos";
+import { ITarea } from "../types/ITodos";
 
 interface ITodoStore {
-  todos: ITodo[];
-  setTodos: (newArrTodos: ITodo[]) => void;
-  addNew: (newTodo: ITodo) => void;
-  editTodo: (id: string, updatedTask: Partial<ITodo>) => void;
+  todos: ITarea[];
+  setTodos: (newArrTodos: ITarea[]) => void;
+  addNew: (newTodo: ITarea) => void;
+  editTodo: (id: string, updatedTask: Partial<ITarea>) => void;
   deleteTodo: (id: string) => void;
 }
 
