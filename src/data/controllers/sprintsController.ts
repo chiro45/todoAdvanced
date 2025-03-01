@@ -72,7 +72,9 @@ export const getTareasBySprintIdController = async (
 ): Promise<ITarea[]> => {
   try {
     const sprints = await getSprintsController();
-    return sprints.find((el) => el.id === idSprint)?.tareas || [];
+    const result = sprints.find((el) => el.id === idSprint);
+    console.log(result);
+   
   } catch (error) {
     console.error("Error en getTareasBySprintId:", error);
     return [];

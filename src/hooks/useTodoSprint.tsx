@@ -1,17 +1,16 @@
-import { useState } from "react";
 import { useShallow } from "zustand/shallow";
 import { todoStore } from "../store/todoStore";
 import { ITarea } from "../types/ITodos";
 import Swal from "sweetalert2";
 
+import { getTareasBySprintId } from "../http/sprintTareas";
 import {
-  getTareasBacklog,
-  updateTareaByIdBacklog,
-} from "../http/backlogTareas";
+  createTareaByIdBySprintIdController,
+  deleteTareaByIdBySprintIdController,
+  updateTareaByIdBySprintIdController,
+} from "../data/controllers/sprintsController";
 
-export const useTodoBacklog = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-
+export const useTodoSprint = ({ idSprint }: { idSprint: string }) => {
   const { todos, setTodos, addNew, editTodo, deleteTodoZuztand } = todoStore(
     useShallow((state) => ({
       todos: state.todos,
@@ -22,37 +21,33 @@ export const useTodoBacklog = () => {
     }))
   );
 
-  const handleGetTodosBacklog = async () => {
-    setLoading(true);
-
+  const handleGetTodosBySprintId = async () => {
     try {
-      const tareas = await getTareasBacklog();
+      const tareas = await getTareasBySprintId(idSprint);
       setTodos(tareas);
     } catch (error) {
       Swal.fire("Error", "No se pudieron obtener las tareas", "error");
-    } finally {
-      setLoading(false);
     }
   };
 
-  const handleCreateTodo = async (newTask: ITarea) => {
+  const handleCreateTodoBySprintId = async (newTask: ITarea) => {
     addNew(newTask); // Agregamos al estado local
-
     try {
+      await createTareaByIdBySprintIdController(idSprint, newTask);
       Swal.fire("Éxito", "Tarea creada correctamente", "success");
     } catch (error) {
       console.error("Error creando la tarea:", error);
-      deleteTodoZuztand(newTask.id!); // Revertimos en caso de error
+      deleteTodoZuztand(newTask.id!); // Revertimos
       Swal.fire("Error", "No se pudo crear la tarea", "error");
     }
   };
 
-  const handleUpdateTodoBacklog = async (item: ITarea) => {
+  const handleUpdateTodoBySprintId = async (item: ITarea) => {
     const previousState = todos.find((t) => t.id === item.id); // Guardamos el estado previo
     editTodo(item); // Actualizamos en el estado local
 
     try {
-      await updateTareaByIdBacklog(item);
+      await updateTareaByIdBySprintIdController(idSprint, item);
       Swal.fire("Éxito", "Tarea actualizada correctamente", "success");
     } catch (error) {
       console.error("Error actualizando la tarea:", error);
@@ -78,6 +73,7 @@ export const useTodoBacklog = () => {
     deleteTodoZuztand(id); // Eliminamos del estado local
 
     try {
+      await deleteTareaByIdBySprintIdController(idSprint, id);
       Swal.fire("Eliminado", "La tarea se eliminó correctamente", "success");
     } catch (error) {
       console.error("Error eliminando la tarea:", error);
@@ -88,10 +84,9 @@ export const useTodoBacklog = () => {
 
   return {
     handleDeleteTodo,
-    handleUpdateTodoBacklog,
-    handleCreateTodo,
-    loading,
-    handleGetTodosBacklog,
+    handleUpdateTodoBySprintId,
+    handleCreateTodoBySprintId,
+    handleGetTodosBySprintId,
     todos,
   };
 };

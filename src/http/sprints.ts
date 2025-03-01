@@ -1,6 +1,8 @@
 import {
   createSprintController,
+  getSprintsController,
   putSprintController,
+  putSprintsController,
 } from "../data/controllers/sprintsController";
 import { ISprint } from "../types/ITodos";
 
@@ -26,24 +28,11 @@ export const updateSprint = async (
   }
 };
 
-export const updateTareaBySprintId = async (
-  idSprint: string,
-  sprintUpdated: ISprint
-): Promise<ISprint | null> => {
+export const deleteSprint = async (idSprint: string) => {
   try {
-    return await putSprintController(idSprint, sprintUpdated);
-  } catch (error) {
-    console.error("Error en getTareasBacklog:", error);
-    return null;
-  }
-};
-
-export const deleteTareaBySprintId = async (
-  idSprint: string,
-  idTarea: string
-): Promise<void> => {
-  try {
-    await deleteTareaByIdBySprintIdController(idSprint, idTarea);
+    let sprints = await getSprintsController();
+    sprints.filter((el) => el.id !== idSprint);
+    await putSprintsController(sprints);
   } catch (error) {
     console.error("Error en getTareasBacklog:", error);
   }

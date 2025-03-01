@@ -25,14 +25,16 @@
         "id": "sprint1",
         "fechaInicio": "2025-02-01",
         "fechaCierre": "2025-02-15",
-        "tareas": {
-          "id": "2025-02-26T19:51:02.079Z",
-          "titulo": "asd",
-          "descripcion": "asd",
-          "estado": "en_progreso",
-          "fechaLimite": "2011-02-20",
-          "color": "#c81919"
-        },
+        "tareas": [
+          {
+            "id": "2025-02-26T19:51:02.079Z",
+            "titulo": "asd",
+            "descripcion": "asd",
+            "estado": "en_progreso",
+            "fechaLimite": "2011-02-20",
+            "color": "#c81919"
+          }
+        ],
         "color": "#00A86B"
       }
     ]

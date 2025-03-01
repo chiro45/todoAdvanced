@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { IEstado, ITarea } from "../../../types/ITodos";
-import { useTodoStore } from "../../../store/counterZuztand";
+import { todoStore } from "../../../store/todoStore";
 import { useTodos } from "../../../hooks/useTodos";
 
 type ICardTodo = {
@@ -8,7 +8,7 @@ type ICardTodo = {
 };
 
 export const CardTodo: FC<ICardTodo> = ({ todo }) => {
-  const todos = useTodoStore((state) => state.todos);
+  const todos = todoStore((state) => state.todos);
 
   const { handleDeleteTodo, handleUpdateTodo } = useTodos();
   // Función para manejar el cambio de estado de la tarea

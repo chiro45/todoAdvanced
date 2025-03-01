@@ -2,17 +2,11 @@ import { useEffect } from "react";
 import { useTodoBacklog } from "../../../hooks/useTodoBacklog";
 
 export const BacklogScreen = () => {
-  const { handleGetTodosBacklog, handleUpdateTodoBacklog, todos } =
+  const { handleGetTodosBacklog, todos } =
     useTodoBacklog();
   useEffect(() => {
     handleGetTodosBacklog();
   }, []);
-
-  const handleEditFirst = async () => {
-    let item = todos[0];
-    const todocito = { ...item, descripcion: "raul" };
-    await handleUpdateTodoBacklog(todocito);
-  };
 
   return (
     <div>
@@ -23,7 +17,6 @@ export const BacklogScreen = () => {
             <p>{el.descripcion}</p>
           </div>
         ))}
-        <button onClick={handleEditFirst}>edit</button>
       </div>
     </div>
   );
