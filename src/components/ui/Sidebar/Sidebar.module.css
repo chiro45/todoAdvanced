@@ -1,0 +1,40 @@
+.containerSidebar {
+  background-color: var(--primary-dark);
+  height: 95vh;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  padding-top: 3rem;
+}
+.containerListSidebar {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+.itemsSidebar {
+  width: 100%;
+  text-align: center;
+  padding: 0.4rem;
+  border-radius: 8px;
+  background-color: var(--info);
+  color: var(--primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.itemsSidebar:hover {
+  background-color: var(--info-hover);
+  cursor: pointer;
+}
+
+.itemSidebarActive {
+  background-color: var(--info-hover);
+}

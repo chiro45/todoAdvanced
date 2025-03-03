@@ -1,0 +1,19 @@
+.containerBacklogScreen {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.containerTitleAndButton {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+}
+.containerListTareas {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: auto;
+  max-height: 70vh;
+  min-height: 69vh;
+}

@@ -5,6 +5,7 @@ import { ITarea } from "../types/ITodos";
 import Swal from "sweetalert2";
 
 import {
+  createTareaBacklog,
   deleteTareaByIdBacklog,
   getTareasBacklog,
   sendTareaToSprintById,
@@ -41,6 +42,7 @@ export const useTodoBacklog = () => {
     addNew(newTask); // Agregamos al estado local
 
     try {
+      await createTareaBacklog(newTask);
       Swal.fire("Éxito", "Tarea creada correctamente", "success");
     } catch (error) {
       console.error("Error creando la tarea:", error);

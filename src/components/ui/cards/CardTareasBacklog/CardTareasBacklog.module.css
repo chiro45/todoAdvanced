@@ -1,0 +1,14 @@
+.containerTareaBaklog {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.4rem;
+  padding: 1rem;
+  background-color: var(--primary-dark);
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.containerTareaBaklog div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}

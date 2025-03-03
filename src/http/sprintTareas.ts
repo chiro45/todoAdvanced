@@ -5,6 +5,7 @@ import {
   updateTareaByIdBySprintIdController,
 } from "../data/controllers/sprintsController";
 import { ITarea } from "../types/ITodos";
+import { handleGenerateRandomId } from "../utils/generateRandomId";
 import { createTareaBacklog, deleteTareaByIdBacklog } from "./backlogTareas";
 
 export const getTareasBySprintId = async (
@@ -22,7 +23,10 @@ export const createTareaBySprintId = async (
   tarea: ITarea
 ): Promise<ITarea | null> => {
   try {
-    return await createTareaByIdBySprintIdController(idSprint, tarea);
+    return await createTareaByIdBySprintIdController(idSprint, {
+      ...tarea,
+      id: handleGenerateRandomId(),
+    });
   } catch (error) {
     console.error("Error en getTareasBacklog:", error);
     return null;

@@ -5,6 +5,7 @@ import {
   putSprintsController,
 } from "../data/controllers/sprintsController";
 import { ISprint } from "../types/ITodos";
+import { handleGenerateRandomId } from "../utils/generateRandomId";
 
 export const getAllSprints = async (): Promise<ISprint[]> => {
   try {
@@ -19,7 +20,7 @@ export const createSprint = async (
   sprint: ISprint
 ): Promise<ISprint | null> => {
   try {
-    return await createSprintController(sprint);
+    return await createSprintController({...sprint, id: handleGenerateRandomId()});
   } catch (error) {
     console.error("Error en getTareasBacklog:", error);
     return null;

@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useTodoBacklog } from "../../../hooks/useTodoBacklog";
-import { ITarea } from "../../../types/ITodos";
+import { ISprint, ITarea } from "../../../types/ITodos";
 import TareaModal from "../../ui/modals/ModalTareas/ModalTarea";
-
+import { CardTareasBacklog } from "../../ui/cards/CardTareasBacklog/CardTareasBacklog";
+import { getAllSprints } from "../../../http/sprints";
+import styles from "./BacklogScreen.module.css";
+import { Button } from "../../ui/Button/Button";
 export const BacklogScreen = () => {
   const {
     handleGetTodosBacklog,
@@ -12,10 +15,18 @@ export const BacklogScreen = () => {
     handleDeleteTodo,
     handleUpdateTodoBacklog,
   } = useTodoBacklog();
+
+  const handleGetSprints = async () => {
+    const data = await getAllSprints();
+    setSprints(data);
+  };
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTarea, setSelectedTarea] = useState<ITarea | null>(null);
 
+  const [sprints, setSprints] = useState<ISprint[]>([]);
+
   useEffect(() => {
+    handleGetSprints();
     handleGetTodosBacklog();
   }, []);
 
@@ -30,19 +41,24 @@ export const BacklogScreen = () => {
   };
 
   return (
-    <div>
+    <div className={styles.containerBacklogScreen}>
       <h1>Backlog</h1>
-      <button onClick={() => openModal()}>Crear Tarea</button>
-      <div>
+      <div  className={styles.containerTitleAndButton}>
+        <h2>Tareas en el backlog</h2>
+        <Button type="info" onClick={() => openModal()}>
+          Crear Tarea
+        </Button>
+      </div>
+      <div className={styles.containerListTareas}>
         {todos.map((el) => (
-          <div key={el.id}>
-            <p>{el.descripcion}</p>
-            <button onClick={() => openModal(el)}>Editar</button>
-            <button onClick={() => handleDeleteTodo(el.id!)}>Eliminar</button>
-            <button onClick={() => sendToSprintById(el.id!, '1')}>
-              send to sprint 1
-            </button>
-          </div>
+          <CardTareasBacklog
+            key={el.id}
+            sprints={sprints}
+            tarea={el}
+            openModal={openModal}
+            sendToSprintById={sendToSprintById}
+            handleDeleteTodo={handleDeleteTodo}
+          />
         ))}
       </div>
       <TareaModal

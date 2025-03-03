@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useSprints } from "../../../hooks/useSprints";
 import { ISprint } from "../../../types/ITodos";
 import { ModalSprint } from "../../ui/modals/ModalSprint/ModalSprint";
-
+import { CardSprint } from "../../ui/cards/CardSprint/CardSprint";
+import styles from "./SprintsScreen.module.css";
+import { Button } from "../../ui/Button/Button";
 export const SprintsScreen = () => {
   const {
     sprints,
@@ -39,23 +41,24 @@ export const SprintsScreen = () => {
   };
 
   return (
-    <div>
-      <h1>Sprints</h1>
-      <button onClick={() => openSprintModal()}>Crear Sprint</button>
-      <div>
+    <div className={styles.containerSprintsScreen}>
+      <div className={styles.containerTitleAndButton}>
+        <h2>Sprints</h2>
+        <Button type="info" onClick={() => openSprintModal()}>
+          Crear Sprint
+        </Button>
+      </div>
+      <div className={styles.containerSprints}>
         {loading ? (
           <p>Cargando...</p>
         ) : (
           sprints.map((sprint) => (
-            <div key={sprint.id}>
-              <p>
-                {sprint.fechaInicio} - {sprint.fechaCierre}
-              </p>
-              <button onClick={() => openSprintModal(sprint)}>Editar</button>
-              <button onClick={() => handleDeleteSprint(sprint.id)}>
-                Eliminar
-              </button>
-            </div>
+            <CardSprint
+              handleDeleteSprint={handleDeleteSprint}
+              openSprintModal={openSprintModal}
+              sprint={sprint}
+              key={sprint.id}
+            />
           ))
         )}
       </div>

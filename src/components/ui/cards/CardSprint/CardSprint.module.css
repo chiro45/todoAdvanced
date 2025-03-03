@@ -1,0 +1,36 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 1.5rem;
+  border-radius: 0.6rem;
+  background-color: var(--primary-dark);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.cardContent {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.cardDate {
+  font-size: 0.9rem;
+}
+
+.cardButtons {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}

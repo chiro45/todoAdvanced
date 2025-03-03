@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@200;300;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+:root {
+  --primary: #ffffff;
+  --primary-dark: #f1f4f4;
+  --secondary: #052637;
+  --secondary-ligth: #0a4a69;
+  --primary-shadow: #cfd8dc;
+  --text-color: #666666;
+
+  /* COLORS */
+  --success: #03cb6a;
+  --info: #5271ff;
+  --warning: #ffaa65;
+  --error: #ff5757;
+
+  /* Hover States for specific colors */
+  --success-hover: #00b25c;
+  --info-hover: #4058d1;
+  --warning-hover: #e68947;
+  --error-hover: #b53f57;
+}
+
+
+* {
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: var(--primary);
+    font-family: var(--font-family);
+}

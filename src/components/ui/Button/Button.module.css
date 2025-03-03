@@ -1,0 +1,52 @@
+.button {
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.button.info {
+  background-color: var(--info);
+  color: var(--primary);
+}
+
+.button.info:hover {
+  background-color: var(--info-hover);
+}
+
+.button.success {
+  background-color: var(--success);
+  color: var(--primary);
+}
+
+.button.success:hover {
+  background-color: var(--success-hover);
+}
+
+.button.warning {
+  background-color: var(--warning);
+  color: var(--primary);
+}
+
+.button.warning:hover {
+  background-color: var(--warning-hover);
+}
+
+.button.error {
+  background-color: var(--error);
+  color: var(--primary);
+}
+
+.button.error :hover {
+  background-color: var(--error-hover);
+}
+
+.button.disabled {
+  background-color: var(--secondary) !important;
+  opacity: 0.8;
+  pointer-events: none;
+}

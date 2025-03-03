@@ -1,0 +1,14 @@
+.containerHeader {
+  background-color: var(--secondary);
+  width: 100vw;
+  height: 5vh;
+}
+.containerTitleHeader {
+  color: var(--primary);
+  width: 50%;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 0.3vw;
+}

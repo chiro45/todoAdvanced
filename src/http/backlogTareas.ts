@@ -7,12 +7,13 @@ import {
   updateTareaBacklogController,
 } from "../data/controllers/backlogController";
 import { createTareaByIdBySprintIdController } from "../data/controllers/sprintsController";
+import { handleGenerateRandomId } from "../utils/generateRandomId";
 
 export const createTareaBacklog = async (
   tarea: ITarea
 ): Promise<ITarea | null> => {
   try {
-    return await createTareaBacklogController(tarea);
+    return await createTareaBacklogController({...tarea, id: handleGenerateRandomId()});
   } catch (error) {
     console.error("Error en getTareasBacklog:", error);
     return null;
