@@ -6,6 +6,15 @@ import {
 } from "../data/controllers/sprintsController";
 import { ISprint } from "../types/ITodos";
 
+export const getAllSprints = async (): Promise<ISprint[]> => {
+  try {
+    return await getSprintsController();
+  } catch (error) {
+    console.error("Error en getTareasBacklog:", error);
+    return [];
+  }
+};
+
 export const createSprint = async (
   sprint: ISprint
 ): Promise<ISprint | null> => {
@@ -17,11 +26,11 @@ export const createSprint = async (
   }
 };
 export const updateSprint = async (
-  idSprint: string,
-  tarea: ISprint
+  sprintUpdated: ISprint
 ): Promise<ISprint | null> => {
   try {
-    return await putSprintController(idSprint, tarea);
+    const { id } = sprintUpdated;
+    return await putSprintController(id, sprintUpdated);
   } catch (error) {
     console.error("Error en getTareasBacklog:", error);
     return null;
@@ -30,9 +39,9 @@ export const updateSprint = async (
 
 export const deleteSprint = async (idSprint: string) => {
   try {
-    let sprints = await getSprintsController();
-    sprints.filter((el) => el.id !== idSprint);
-    await putSprintsController(sprints);
+    const sprints = await getSprintsController();
+    const result = sprints.filter((el) => el.id !== idSprint);
+    await putSprintsController(result);
   } catch (error) {
     console.error("Error en getTareasBacklog:", error);
   }

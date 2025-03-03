@@ -2,40 +2,32 @@
   "backlog": {
     "tareas": [
       {
-        "id": "2025-02-26T19:51:02.079Z",
-        "titulo": "asd",
-        "descripcion": "222",
-        "estado": "en_progreso",
-        "fechaLimite": "2011-02-20",
-        "color": "#c81919"
-      },
-      {
         "id": "2025-02-26T19:52:29.576Z",
         "titulo": "asdasd",
         "descripcion": "asdasdasd",
         "estado": "completado",
         "fechaLimite": "2025-02-06",
         "color": "#b16868"
+      },
+      {
+        "id": "123",
+        "titulo": "1111",
+        "descripcion": "123123",
+        "estado": "pendiente",
+        "fechaLimite": "2025-03-08",
+        "color": "#ffffff"
       }
     ]
   },
   "sprintList": {
     "sprints": [
       {
-        "id": "sprint1",
-        "fechaInicio": "2025-02-01",
-        "fechaCierre": "2025-02-15",
-        "tareas": [
-          {
-            "id": "2025-02-26T19:51:02.079Z",
-            "titulo": "asd",
-            "descripcion": "asd",
-            "estado": "en_progreso",
-            "fechaLimite": "2011-02-20",
-            "color": "#c81919"
-          }
-        ],
-        "color": "#00A86B"
+        "id": "1",
+        "fechaInicio": "2025-03-02",
+        "fechaCierre": "2025-03-15",
+        "nombre": "Sprint",
+        "tareas": [],
+        "color": "#954141"
       }
     ]
   }

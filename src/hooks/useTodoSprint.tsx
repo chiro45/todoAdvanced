@@ -3,14 +3,16 @@ import { todoStore } from "../store/todoStore";
 import { ITarea } from "../types/ITodos";
 import Swal from "sweetalert2";
 
-import { getTareasBySprintId } from "../http/sprintTareas";
+import { getTareasBySprintId, sendTareaToBacklog } from "../http/sprintTareas";
 import {
   createTareaByIdBySprintIdController,
   deleteTareaByIdBySprintIdController,
   updateTareaByIdBySprintIdController,
 } from "../data/controllers/sprintsController";
 
-export const useTodoSprint = ({ idSprint }: { idSprint: string }) => {
+type IUseTodoSprint = { idSprint: string };
+
+export const useTodoSprint = ({ idSprint }: IUseTodoSprint) => {
   const { todos, setTodos, addNew, editTodo, deleteTodoZuztand } = todoStore(
     useShallow((state) => ({
       todos: state.todos,
@@ -82,11 +84,42 @@ export const useTodoSprint = ({ idSprint }: { idSprint: string }) => {
     }
   };
 
+  const sendToBacklog = async (id: string) => {
+    const previousState = todos.find((t) => t.id === id); // Guardamos el estado previo
+
+    const confirm = await Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Esta acción moverá la tarea al backlog",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, mover",
+      cancelButtonText: "Cancelar",
+    });
+
+    if (!confirm.isConfirmed) return;
+
+    deleteTodoZuztand(id); // Eliminamos del estado local
+
+    try {
+      await sendTareaToBacklog(previousState!, idSprint);
+      Swal.fire(
+        "Movida",
+        "La tarea se movió al backlog correctamente",
+        "success"
+      );
+    } catch (error) {
+      console.error("Error moviendo la tarea al backlog:", error);
+      if (previousState) addNew(previousState); // Restauramos la tarea si falla
+      Swal.fire("Error", "No se pudo mover la tarea al backlog", "error");
+    }
+  };
+
   return {
     handleDeleteTodo,
     handleUpdateTodoBySprintId,
     handleCreateTodoBySprintId,
     handleGetTodosBySprintId,
+    sendToBacklog,
     todos,
   };
 };

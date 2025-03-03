@@ -73,13 +73,13 @@ export const getTareasBySprintIdController = async (
   try {
     const sprints = await getSprintsController();
     const result = sprints.find((el) => el.id === idSprint);
-    console.log(result);
-   
+    return result ? result.tareas : [];
   } catch (error) {
     console.error("Error en getTareasBySprintId:", error);
     return [];
   }
 };
+
 //actializamos una tarea dentro del sprint
 export const updateTareaByIdBySprintIdController = async (
   idSprint: string,
@@ -114,10 +114,9 @@ export const deleteTareaByIdBySprintIdController = async (
   idTarea: string
 ) => {
   try {
-    const tareas = (await getTareasBySprintIdController(idSprint)).filter(
-      (el) => el.id !== idTarea
-    );
-    await putSprintsTareasController(idSprint, tareas);
+    const tareas = await getTareasBySprintIdController(idSprint);
+    const result = tareas.filter((el) => el.id !== idTarea);
+    await putSprintsTareasController(idSprint, result);
   } catch (error) {
     throw new Error("Error al eliminar la tarea del Sprint");
   }

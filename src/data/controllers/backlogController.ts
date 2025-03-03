@@ -55,9 +55,9 @@ export const getTareaByIdController = async (id: string): Promise<ITarea> => {
 //eliminamos una tarea del backlog
 export const deleteTareaBacklogController = async (id: string) => {
   try {
-    let tareas = await getTareasBacklogController();
-    tareas = tareas.filter((el) => el.id !== id); // Se mantiene la lógica
-    await putTareasBacklog(tareas);
+    const tareas = await getTareasBacklogController();
+    const result = tareas.filter((el) => el.id !== id);
+    await putTareasBacklog(result);
   } catch (error) {
     throw new Error(`Error al eliminar tarea: ${error}`);
   }

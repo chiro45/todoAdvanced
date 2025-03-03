@@ -5,7 +5,9 @@ import { ITarea } from "../types/ITodos";
 import Swal from "sweetalert2";
 
 import {
+  deleteTareaByIdBacklog,
   getTareasBacklog,
+  sendTareaToSprintById,
   updateTareaByIdBacklog,
 } from "../http/backlogTareas";
 
@@ -78,11 +80,42 @@ export const useTodoBacklog = () => {
     deleteTodoZuztand(id); // Eliminamos del estado local
 
     try {
+      await deleteTareaByIdBacklog(id);
       Swal.fire("Eliminado", "La tarea se eliminó correctamente", "success");
     } catch (error) {
       console.error("Error eliminando la tarea:", error);
       if (previousState) addNew(previousState); // Restauramos la tarea si falla
       Swal.fire("Error", "No se pudo eliminar la tarea", "error");
+    }
+  };
+
+  const sendToSprintById = async (id: string, idSprint: string) => {
+    const previousState = todos.find((t) => t.id === id); // Guardamos el estado previo
+
+    const confirm = await Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Esta acción moverá la tarea al backlog",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, mover",
+      cancelButtonText: "Cancelar",
+    });
+
+    if (!confirm.isConfirmed) return;
+
+    deleteTodoZuztand(id); // Eliminamos del estado local
+
+    try {
+      await sendTareaToSprintById(previousState!, idSprint);
+      Swal.fire(
+        "Movida",
+        "La tarea se movió al backlog correctamente",
+        "success"
+      );
+    } catch (error) {
+      console.error("Error moviendo la tarea al backlog:", error);
+      if (previousState) addNew(previousState); // Restauramos la tarea si falla
+      Swal.fire("Error", "No se pudo mover la tarea al backlog", "error");
     }
   };
 
@@ -92,6 +125,7 @@ export const useTodoBacklog = () => {
     handleCreateTodo,
     loading,
     handleGetTodosBacklog,
+    sendToSprintById,
     todos,
   };
 };

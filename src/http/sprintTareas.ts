@@ -5,7 +5,7 @@ import {
   updateTareaByIdBySprintIdController,
 } from "../data/controllers/sprintsController";
 import { ITarea } from "../types/ITodos";
-import { deleteTareaByIdBacklog } from "./backlogTareas";
+import { createTareaBacklog, deleteTareaByIdBacklog } from "./backlogTareas";
 
 export const getTareasBySprintId = async (
   idSprint: string
@@ -55,7 +55,7 @@ export const deleteTareaBySprintId = async (
 //mandamos una tarea de una sprint al backlog
 export const sendTareaToBacklog = async (tarea: ITarea, sprintId: string) => {
   try {
-    await createTareaBySprintId(sprintId, tarea);
-    await deleteTareaByIdBacklog(tarea.id!);
+    await createTareaBacklog(tarea);
+    await deleteTareaBySprintId(sprintId, tarea.id!);
   } catch (error) {}
 };

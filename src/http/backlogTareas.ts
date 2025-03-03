@@ -6,6 +6,7 @@ import {
   getTareasBacklogController,
   updateTareaBacklogController,
 } from "../data/controllers/backlogController";
+import { createTareaByIdBySprintIdController } from "../data/controllers/sprintsController";
 
 export const createTareaBacklog = async (
   tarea: ITarea
@@ -55,4 +56,15 @@ export const deleteTareaByIdBacklog = async (id: string): Promise<void> => {
   } catch (error) {
     console.error("Error en deleteTareaByIdBacklog:", error);
   }
+};
+
+//mandamos una tarea de una sprint al backlog
+export const sendTareaToSprintById = async (
+  tarea: ITarea,
+  sprintId: string
+) => {
+  try {
+    await createTareaByIdBySprintIdController(sprintId, tarea);
+    await deleteTareaByIdBacklog(tarea.id!);
+  } catch (error) {}
 };
