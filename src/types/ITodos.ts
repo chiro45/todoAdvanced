@@ -21,5 +21,4 @@ export interface ISprint {
   fechaInicio: string;
   fechaCierre: string;
   tareas: ITarea[];
-  color?: string;
 }

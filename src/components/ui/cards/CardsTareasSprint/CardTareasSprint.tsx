@@ -1,18 +1,20 @@
-import { ChangeEvent, FC, useState } from "react";
+import { FC, useState } from "react";
 import { IEstado, ISprint, ITarea } from "../../../../types/ITodos";
 import styles from "./CardTareasSprint.module.css";
 import { Button } from "../../Button/Button";
 import {
   IconChevronsRight,
   IconCubeSend,
+  IconEye,
   IconPencil,
   IconTrash,
 } from "@tabler/icons-react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useTodoSprint } from "../../../../hooks/useTodoSprint";
 type ICardTareas = {
   tarea: ITarea;
   openModal: (tarea: ITarea) => void;
+  openView: (tarea: ITarea) => void;
   handleDeleteTodo: (id: string) => void;
   sendToBacklog: (id: string) => void;
   sprints: ISprint[];
@@ -26,15 +28,13 @@ const estados: { label: string; value: IEstado }[] = [
 export const CardTareasSprint: FC<ICardTareas> = ({
   tarea,
   openModal,
+  openView,
   handleDeleteTodo,
   sendToBacklog,
 }) => {
-  const navigate = useNavigate();
   const { idSprint } = useParams<{
     idSprint: string;
   }>();
-  const location = useLocation();
-
   const [openState, setOpenStates] = useState(false);
 
   const { handleUpdateTodoBySprintId } = useTodoSprint({ idSprint: idSprint! });
@@ -119,8 +119,16 @@ export const CardTareasSprint: FC<ICardTareas> = ({
           type="info"
           stylesCustom={{ padding: "4px 6px" }}
           handleonClick={() => {
+            openView(tarea);
+          }}
+        >
+          <IconEye />
+        </Button>
+        <Button
+          type="info"
+          stylesCustom={{ padding: "4px 6px" }}
+          handleonClick={() => {
             openModal(tarea);
-            navigate(`${location.pathname}/${tarea.id}`);
           }}
         >
           <IconPencil />

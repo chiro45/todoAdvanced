@@ -7,10 +7,14 @@ interface ISprintsStore {
   addNewSprintZustand: (newSprint: ISprint) => void;
   editSprintZustand: (updatedSprint: Partial<ISprint>) => void;
   deleteSprintZustand: (id: string) => void;
+  sprintName: string | null;
+  setSprintName: (param: string | null) => void;
 }
 
 export const useSprintStore = create<ISprintsStore>((set) => ({
   sprints: [],
+  sprintName: null,
+  setSprintName: (nameSprint) => set(() => ({ sprintName: nameSprint })),
   setSprintsZustand: (newArrSprints) => set(() => ({ sprints: newArrSprints })),
   addNewSprintZustand: (newSprint) =>
     set((state) => ({

@@ -10,6 +10,7 @@ import {
   updateTareaByIdBySprintIdController,
 } from "../data/controllers/sprintsController";
 import { useCallback } from "react";
+import { handleGenerateRandomId } from "../utils/generateRandomId";
 
 type IUseTodoSprint = { idSprint: string };
 
@@ -43,10 +44,14 @@ export const useTodoSprint = ({ idSprint }: IUseTodoSprint) => {
 
   /** ✅ Crear tarea */
   const handleCreateTodoBySprintId = async (newTask: ITarea) => {
-    addNew(newTask);
+    const taskWithId = {
+      ...newTask,
+      id: handleGenerateRandomId(),
+    };
+    addNew(taskWithId);
 
     try {
-      await createTareaByIdBySprintIdController(idSprint, newTask);
+      await createTareaByIdBySprintIdController(idSprint, taskWithId);
       Swal.fire("Éxito", "Tarea creada correctamente", "success");
     } catch (error) {
       handleError(error, "crear", () => deleteTodoZuztand(newTask.id!));
@@ -54,13 +59,17 @@ export const useTodoSprint = ({ idSprint }: IUseTodoSprint) => {
   };
 
   /** ✅ Actualizar tarea */
-  const handleUpdateTodoBySprintId = async (item: ITarea) => {
+  const handleUpdateTodoBySprintId = async (
+    item: ITarea,
+    showalert?: boolean
+  ) => {
     const previousState = todos.find((t) => t.id === item.id);
     editTodo(item);
 
     try {
       await updateTareaByIdBySprintIdController(idSprint, item);
-      Swal.fire("Éxito", "Tarea actualizada correctamente", "success");
+      if (showalert)
+        Swal.fire("Éxito", "Tarea actualizada correctamente", "success");
     } catch (error) {
       handleError(
         error,

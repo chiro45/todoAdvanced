@@ -10,6 +10,7 @@ import {
 import Swal from "sweetalert2";
 import { ISprint } from "../types/ITodos";
 import { useNavigate } from "react-router-dom";
+import { handleGenerateRandomId } from "../utils/generateRandomId";
 export const useSprints = () => {
   const [loading, setLoading] = useState(false);
 
@@ -43,9 +44,12 @@ export const useSprints = () => {
   };
 
   const handleCreateSprint = async (newSprint: ISprint) => {
-    addNewSprintZustand(newSprint); // Agregamos al estado local
+    const newSprintWithID = { ...newSprint, id: handleGenerateRandomId() };
+
+    addNewSprintZustand(newSprintWithID); // Agregamos al estado local
+
     try {
-      await createSprint(newSprint);
+      await createSprint(newSprintWithID);
       Swal.fire("Éxito", "Tarea creada correctamente", "success");
     } catch (error) {
       console.error("Error creando la tarea:", error);
@@ -71,7 +75,7 @@ export const useSprints = () => {
   const navigate = useNavigate();
   const handleDeleteSprint = async (id: string) => {
     const previousState = sprints.find((sprint) => sprint.id === id); // Guardamos el estado previo
-
+    const result= sprints.filter((el)=> el.id !== id)
     const confirm = await Swal.fire({
       title: "¿Estás seguro?",
       text: "Esta acción no se puede deshacer",
@@ -87,7 +91,11 @@ export const useSprints = () => {
     try {
       Swal.fire("Eliminado", "La tarea se eliminó correctamente", "success");
       await deleteSprint(id);
-      navigate(`/sprint/${sprints[0].id}`);
+      if (result.length > 0) {
+        navigate(`/sprint/${sprints[0].id}`);
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       console.error("Error eliminando la tarea:", error);
       navigate(`/sprint/${id}`);

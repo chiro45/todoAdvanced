@@ -65,7 +65,7 @@ export const sendTareaToSprintById = async (
   sprintId: string
 ) => {
   try {
-    await createTareaByIdBySprintIdController(sprintId, tarea);
+    await createTareaByIdBySprintIdController(sprintId, {...tarea, estado:"pendiente"});
     await deleteTareaByIdBacklog(tarea.id!);
   } catch (error) {}
 };

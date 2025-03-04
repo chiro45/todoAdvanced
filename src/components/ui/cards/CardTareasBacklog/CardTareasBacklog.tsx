@@ -2,11 +2,18 @@ import { ChangeEvent, FC, useState } from "react";
 import { ISprint, ITarea } from "../../../../types/ITodos";
 import styles from "./CardTareasBacklog.module.css";
 import { Button } from "../../Button/Button";
-import { IconCubeSend, IconPencil, IconTrash } from "@tabler/icons-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import {
+  IconCubeSend,
+  IconEye,
+  IconPencil,
+  IconTrash,
+} from "@tabler/icons-react";
+
 type ICardTareas = {
   tarea: ITarea;
   openModal: (tarea: ITarea) => void;
+  openView: (tarea: ITarea) => void;
+
   handleDeleteTodo: (id: string) => void;
   sendToSprintById?: (id: string, idSprint: string) => void;
   sprints: ISprint[];
@@ -16,6 +23,7 @@ export const CardTareasBacklog: FC<ICardTareas> = ({
   openModal,
   handleDeleteTodo,
   sendToSprintById,
+  openView,
   sprints,
 }) => {
   const [sprintId, setSprintId] = useState<string>("-1");
@@ -23,10 +31,6 @@ export const CardTareasBacklog: FC<ICardTareas> = ({
     const { value } = e.target;
     setSprintId(value);
   };
-
-  const navigate = useNavigate();
-
-  const location = useLocation();
 
   return (
     <div key={tarea.id} className={styles.containerTareaBaklog}>
@@ -58,16 +62,19 @@ export const CardTareasBacklog: FC<ICardTareas> = ({
             </select>
           </div>
         )}
-
+        <Button
+          type="info"
+          stylesCustom={{ padding: "4px 6px" }}
+          handleonClick={() => {
+            openView(tarea);
+          }}
+        >
+          <IconEye />
+        </Button>
         <Button
           type="info"
           handleonClick={() => {
             openModal(tarea);
-            if (location.pathname !== "/") {
-              navigate(`${location.pathname}/${tarea.id}`);
-            } else {
-              navigate(`/${tarea.id}`);
-            }
           }}
         >
           <IconPencil />

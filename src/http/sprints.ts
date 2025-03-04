@@ -20,7 +20,7 @@ export const createSprint = async (
   sprint: ISprint
 ): Promise<ISprint | null> => {
   try {
-    return await createSprintController({...sprint, id: handleGenerateRandomId()});
+    return await createSprintController(sprint);
   } catch (error) {
     console.error("Error en getTareasBacklog:", error);
     return null;

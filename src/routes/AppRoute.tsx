@@ -12,11 +12,11 @@ export const AppRoute = () => {
         <Sidebar />
         <Routes>
           {/* La ruta base puede recibir un idTarea opcional */}
-          <Route path="/:idTarea?" element={<BacklogScreen />} />
+          <Route path="/" element={<BacklogScreen />} />
 
           {/* La ruta del sprint con idSprint obligatorio e idTarea opcional */}
           <Route
-            path="/sprint/:idSprint/:idTarea?"
+            path="/sprint/:idSprint"
             element={<SprintScreen />}
           />
         </Routes>

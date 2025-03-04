@@ -8,6 +8,15 @@ import { IconPlaylistAdd } from "@tabler/icons-react";
 import { useTodoSprint } from "../../../hooks/useTodoSprint";
 import { useParams } from "react-router-dom";
 import { CardTareasSprint } from "../../ui/cards/CardsTareasSprint/CardTareasSprint";
+import { useSprintStore } from "../../../store/sprintStore";
+import { ModalInfo } from "../../ui/modals/ModalInfo/ModalInfo";
+
+const fields: any = [
+  { label: "Título", key: "titulo" },
+  { label: "Descripción", key: "descripcion" },
+  { label: "Estado", key: "estado" },
+  { label: "Fecha Límite", key: "fechaLimite" },
+];
 
 export const SprintScreen = () => {
   const { idSprint } = useParams<{
@@ -28,7 +37,10 @@ export const SprintScreen = () => {
     setSprints(data);
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openModalView, setOpenModalView] = useState(false);
   const [selectedTarea, setSelectedTarea] = useState<ITarea | null>(null);
+
+  const sprintName = useSprintStore((state) => state.sprintName);
 
   const [sprints, setSprints] = useState<ISprint[]>([]);
 
@@ -47,9 +59,18 @@ export const SprintScreen = () => {
     setSelectedTarea(null);
   };
 
+  const openView = (tarea: ITarea) => {
+    setSelectedTarea(tarea);
+    setOpenModalView(true);
+  };
+  const closeView = () => {
+    setSelectedTarea(null);
+    setOpenModalView(false);
+  };
+
   return (
     <div className={styles.containerBacklogScreen}>
-      <h1>Sprint {idSprint}</h1>
+      <h1>Nombre de la sprint: {sprintName}</h1>
       <div className={styles.containerTitleAndButton}>
         <h2>Tareas en la sprint</h2>
         <Button type="info" handleonClick={() => openModal()}>
@@ -67,6 +88,7 @@ export const SprintScreen = () => {
                   key={el.id}
                   sprints={sprints}
                   tarea={el}
+                  openView={openView}
                   openModal={openModal}
                   sendToBacklog={sendToBacklog}
                   handleDeleteTodo={handleDeleteTodo}
@@ -85,6 +107,7 @@ export const SprintScreen = () => {
                   key={el.id}
                   sprints={sprints}
                   tarea={el}
+                  openView={openView}
                   openModal={openModal}
                   sendToBacklog={sendToBacklog}
                   handleDeleteTodo={handleDeleteTodo}
@@ -104,6 +127,7 @@ export const SprintScreen = () => {
                   sprints={sprints}
                   tarea={el}
                   openModal={openModal}
+                  openView={openView}
                   sendToBacklog={sendToBacklog}
                   handleDeleteTodo={handleDeleteTodo}
                 />
@@ -111,6 +135,15 @@ export const SprintScreen = () => {
           </div>
         </div>
       </div>
+
+      {openModalView && selectedTarea && (
+        <ModalInfo<ITarea>
+          title={"Detalle Tarea"}
+          fields={fields}
+          handleCloseModal={closeView}
+          data={selectedTarea}
+        />
+      )}
 
       <TareaModal
         isOpen={isModalOpen}

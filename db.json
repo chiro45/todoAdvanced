@@ -2,56 +2,49 @@
   "backlog": {
     "tareas": [
       {
-        "id": "f1efdafe-be35-4d13-ba61-078b76ee8943",
-        "titulo": "Tarea 1",
-        "descripcion": "Es una descripcion",
+        "id": "dcec0ad4-31e0-4279-8ccf-72bd1f20b52d",
+        "titulo": "1",
+        "descripcion": "1",
         "estado": "pendiente",
-        "fechaLimite": "2025-03-06"
-      },
-      {
-        "id": "f1efdafe-be35-4d13-ba61-078b76ee8942",
-        "titulo": "Tarea 1",
-        "descripcion": "Es una descripcion",
-        "estado": "pendiente",
-        "fechaLimite": "2025-03-06"
-      },
-      {
-        "id": "6a7d22dc-47a4-4030-ab38-62c85c470d17",
-        "titulo": "Tarea 1",
-        "descripcion": "Es una descripcion",
-        "estado": "en_progreso",
-        "fechaLimite": "2025-03-06"
+        "fechaLimite": "2025-03-05"
       }
     ]
   },
   "sprintList": {
     "sprints": [
       {
-        "id": "c6e76f68-bbee-42a1-8541-6e2411063742",
-        "fechaInicio": "2025-03-10",
-        "fechaCierre": "2025-03-17",
-        "nombre": "Sprint 2",
+        "id": "b0e3f34b-68c6-49eb-b059-ab251ed81629",
+        "fechaInicio": "2025-03-04",
+        "fechaCierre": "2025-03-11",
+        "nombre": "Sprint 1",
         "tareas": [
           {
-            "id": "29f8e4d7-8391-4649-b0b4-4cfe3830ff95",
-            "titulo": "Tarea 2",
-            "descripcion": "Es una descripcion 2",
+            "id": "",
+            "titulo": "Tarea 1",
+            "descripcion": "Estamos aca",
             "estado": "pendiente",
-            "fechaLimite": "2025-03-07"
+            "fechaLimite": "2025-03-05"
           },
           {
-            "id": "0afc9bc0-3ec5-4330-9d08-9eff0f09d445",
-            "titulo": "Tarea 1",
-            "descripcion": "Es una descripcion",
-            "estado": "en_progreso",
+            "id": "50699dec-3d1a-45ff-a94d-82d416eac053",
+            "titulo": "Tarea 2",
+            "descripcion": "Estamos aca",
+            "estado": "pendiente",
             "fechaLimite": "2025-03-06"
           },
           {
-            "id": "f1efdafe-be35-4d13-ba61-078b76ee8947",
+            "id": "1a647a89-796b-454b-98a6-653514685b72",
             "titulo": "Tarea 1",
-            "descripcion": "Es una descripcion",
+            "descripcion": "Estamos aca",
             "estado": "completado",
-            "fechaLimite": "2025-03-06"
+            "fechaLimite": "2025-03-05"
+          },
+          {
+            "id": "29e5666c-f1cb-4974-b34b-f93a0b83c659",
+            "titulo": "1",
+            "descripcion": "1",
+            "estado": "pendiente",
+            "fechaLimite": "2025-03-04"
           }
         ]
       }
