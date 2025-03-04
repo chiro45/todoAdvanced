@@ -6,46 +6,26 @@
         "titulo": "Tarea 1",
         "descripcion": "Es una descripcion",
         "estado": "pendiente",
-        "fechaLimite": "2025-03-06",
-        "color": "#880c0c"
+        "fechaLimite": "2025-03-06"
       },
       {
         "id": "f1efdafe-be35-4d13-ba61-078b76ee8942",
         "titulo": "Tarea 1",
         "descripcion": "Es una descripcion",
         "estado": "pendiente",
-        "fechaLimite": "2025-03-06",
-        "color": "#880c0c"
+        "fechaLimite": "2025-03-06"
+      },
+      {
+        "id": "6a7d22dc-47a4-4030-ab38-62c85c470d17",
+        "titulo": "Tarea 1",
+        "descripcion": "Es una descripcion",
+        "estado": "en_progreso",
+        "fechaLimite": "2025-03-06"
       }
     ]
   },
   "sprintList": {
     "sprints": [
-      {
-        "id": "f656e5b3-1f97-40da-b3ce-936a2ae3f2b8",
-        "fechaInicio": "2025-03-03",
-        "fechaCierre": "2025-03-10",
-        "nombre": "Sprint 1",
-        "tareas": [
-          {
-            "id": "f1efdafe-be35-4d13-ba61-078b76ee8941",
-            "titulo": "Tarea 1",
-            "descripcion": "Es una descripcion",
-            "estado": "pendiente",
-            "fechaLimite": "2025-03-06",
-            "color": "#880c0c"
-          },
-          {
-            "id": "f1efdafe-be35-4d13-ba61-078b76ee8944",
-            "titulo": "Tarea 1",
-            "descripcion": "Es una descripcion",
-            "estado": "pendiente",
-            "fechaLimite": "2025-03-06",
-            "color": "#880c0c"
-          }
-        ],
-        "color": "#9f2323"
-      },
       {
         "id": "c6e76f68-bbee-42a1-8541-6e2411063742",
         "fechaInicio": "2025-03-10",
@@ -57,19 +37,23 @@
             "titulo": "Tarea 2",
             "descripcion": "Es una descripcion 2",
             "estado": "pendiente",
-            "fechaLimite": "2025-03-07",
-            "color": "#856060"
+            "fechaLimite": "2025-03-07"
           },
           {
-            "id": "f1efdafe-be35-4d13-ba61-078b76ee8945",
+            "id": "0afc9bc0-3ec5-4330-9d08-9eff0f09d445",
             "titulo": "Tarea 1",
             "descripcion": "Es una descripcion",
-            "estado": "pendiente",
-            "fechaLimite": "2025-03-06",
-            "color": "#880c0c"
+            "estado": "en_progreso",
+            "fechaLimite": "2025-03-06"
+          },
+          {
+            "id": "f1efdafe-be35-4d13-ba61-078b76ee8947",
+            "titulo": "Tarea 1",
+            "descripcion": "Es una descripcion",
+            "estado": "completado",
+            "fechaLimite": "2025-03-06"
           }
-        ],
-        "color": "#d73333"
+        ]
       }
     ]
   }

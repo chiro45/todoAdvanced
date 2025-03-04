@@ -7,16 +7,15 @@
   align-items: center;
   flex-direction: column;
   padding: 1rem;
-  padding-top: 3rem;
+  gap: 1rem;
 }
 .containerListSidebar {
-  list-style: none;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  width: 100%;
+  width: 80%;
 }
 .itemsSidebar {
   width: 100%;
@@ -37,4 +36,46 @@
 
 .itemSidebarActive {
   background-color: var(--info-hover);
+}
+
+.containerSprints {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+  background-color: var(--primary);
+  border-radius: 0.4rem;
+}
+
+.sidebarTitle {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.sidebarTitle h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-light);
+  margin: 0;
+}
+
+.titleDivider {
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-color);
+  border: none;
+  margin: 0.5rem auto;
+}
+
+.containerListSprints {
+  min-height: 74vh;
+  max-height: 75vh;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }

@@ -2,11 +2,13 @@ import { ChangeEvent, FC, useState } from "react";
 import { ISprint, ITarea } from "../../../../types/ITodos";
 import styles from "./CardTareasBacklog.module.css";
 import { Button } from "../../Button/Button";
+import { IconCubeSend, IconPencil, IconTrash } from "@tabler/icons-react";
+import { useLocation, useNavigate } from "react-router-dom";
 type ICardTareas = {
   tarea: ITarea;
   openModal: (tarea: ITarea) => void;
   handleDeleteTodo: (id: string) => void;
-  sendToSprintById: (id: string, idSprint: string) => void;
+  sendToSprintById?: (id: string, idSprint: string) => void;
   sprints: ISprint[];
 };
 export const CardTareasBacklog: FC<ICardTareas> = ({
@@ -16,12 +18,16 @@ export const CardTareasBacklog: FC<ICardTareas> = ({
   sendToSprintById,
   sprints,
 }) => {
-  const [sprintId, setSprintId] = useState<string | null>(null);
-
+  const [sprintId, setSprintId] = useState<string>("-1");
   const handleChangeSelector = (e: ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
     setSprintId(value);
   };
+
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
   return (
     <div key={tarea.id} className={styles.containerTareaBaklog}>
       <div>
@@ -33,26 +39,41 @@ export const CardTareasBacklog: FC<ICardTareas> = ({
           <div>
             <Button
               type="success"
-              onClick={() => {
-                if (sprintId) {
+              disabled={sprintId === "-1"}
+              handleonClick={() => {
+                if (sendToSprintById) {
                   sendToSprintById(tarea.id!, sprintId);
                 }
               }}
             >
-              Enviar a
+              Enviar a <IconCubeSend />
             </Button>
             <select onChange={handleChangeSelector}>
+              <option value={"-1"}>Seleccione una sprint</option>
               {sprints.map((el) => (
-                <option value={el.id}>{el.nombre}</option>
+                <option key={el.id} value={el.id}>
+                  {el.nombre}
+                </option>
               ))}
             </select>
           </div>
         )}
-        <Button type="info" onClick={() => openModal(tarea)}>
-          Editar
+
+        <Button
+          type="info"
+          handleonClick={() => {
+            openModal(tarea);
+            if (location.pathname !== "/") {
+              navigate(`${location.pathname}/${tarea.id}`);
+            } else {
+              navigate(`/${tarea.id}`);
+            }
+          }}
+        >
+          <IconPencil />
         </Button>
-        <Button type="error" onClick={() => handleDeleteTodo(tarea.id!)}>
-          Eliminar
+        <Button type="error" handleonClick={() => handleDeleteTodo(tarea.id!)}>
+          <IconTrash />
         </Button>
       </div>
     </div>

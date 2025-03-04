@@ -1,0 +1,82 @@
+.containerTareaBaklog {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0.4rem;
+  gap: 10px;
+  padding: 1.2rem;
+  background-color: var(--primary-dark);
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.contentTarea {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.tareaActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 16px;
+}
+.containerChangeState {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  background-color: var(--warning);
+  border-radius: 8px;
+  color: var(--primary);
+}
+.nextState {
+  border-radius: 0.4rem;
+  padding: 4px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 100%;
+  border-radius: 0px 8px 8px 0px;
+  border-left: 1px solid var(--primary);
+}
+.nextState:hover {
+  background-color: var(--warning-hover);
+  cursor: pointer;
+}
+.changeState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.4rem;
+  padding: 4px 6px;
+  border-radius: 8px 0px 0px 8px;
+}
+.changeState:hover {
+  cursor: pointer;
+  background-color: var(--warning-hover);
+}
+
+.desplegableState {
+  position: absolute;
+  top: 104%;
+  left: 0;
+  z-index: 600;
+  color: var(--text-color);
+  background-color: var(--warning);
+  width: 100%;
+  border-radius: 0.4rem;
+
+  list-style: none;
+}
+.desplegableState li {
+  text-align: center;
+  padding: 0.3rem;
+  color: var(--primary);
+}
+.desplegableState li:hover {
+  border-radius: 0.4rem;
+  background-color: var(--warning-hover);
+}

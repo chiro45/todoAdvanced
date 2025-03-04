@@ -1,0 +1,39 @@
+.containerBacklogScreen {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+}
+
+.containerTitleAndButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.containerListTareas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.column {
+  background-color: var(--primary-shadow);
+  padding: 15px;
+  border-radius: 8px;
+  min-height: 76vh;
+  max-height: 76.5vh;
+  overflow-y: auto;
+}
+
+.column h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

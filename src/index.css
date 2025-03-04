@@ -35,3 +35,26 @@ body {
     background-color: var(--primary);
     font-family: var(--font-family);
 }
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    background: transparent;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #cfd8dc;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #c3cccf;
+}

@@ -9,6 +9,7 @@ import {
 } from "../http/sprints";
 import Swal from "sweetalert2";
 import { ISprint } from "../types/ITodos";
+import { useNavigate } from "react-router-dom";
 export const useSprints = () => {
   const [loading, setLoading] = useState(false);
 
@@ -67,6 +68,7 @@ export const useSprints = () => {
     }
   };
 
+  const navigate = useNavigate();
   const handleDeleteSprint = async (id: string) => {
     const previousState = sprints.find((sprint) => sprint.id === id); // Guardamos el estado previo
 
@@ -82,12 +84,13 @@ export const useSprints = () => {
     if (!confirm.isConfirmed) return;
 
     deleteSprintZustand(id); // Eliminamos del estado local
-
     try {
       Swal.fire("Eliminado", "La tarea se eliminó correctamente", "success");
       await deleteSprint(id);
+      navigate(`/sprint/${sprints[0].id}`);
     } catch (error) {
       console.error("Error eliminando la tarea:", error);
+      navigate(`/sprint/${id}`);
       if (previousState) addNewSprintZustand(previousState); // Restauramos la tarea si falla
       Swal.fire("Error", "No se pudo eliminar la tarea", "error");
     }

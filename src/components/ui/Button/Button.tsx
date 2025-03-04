@@ -1,32 +1,32 @@
-import { CSSProperties, FC, ReactNode } from "react";
+import { CSSProperties, FC, MouseEvent, ReactNode } from "react";
 import styles from "./Button.module.css";
 
 type ITypeButton = "info" | "error" | "warning" | "disabled" | "success";
 
-type Ibutton = {
+type IButton = {
   stylesCustom?: CSSProperties;
   type: ITypeButton;
   disabled?: boolean;
   children: ReactNode;
-  onClick: VoidFunction;
+  handleonClick: () => void;
 };
 
-export const Button: FC<Ibutton> = ({
+export const Button: FC<IButton> = ({
   children,
   type,
   stylesCustom,
   disabled,
-  onClick,
+  handleonClick: onClick,
 }) => {
   return (
     <div
-      onClick={() => {
+      onClick={(e: MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation();
         if (!disabled) onClick();
       }}
-      className={`${styles.button} 
+      className={`${styles.button}  
         ${styles[type]} 
-        ${disabled ? styles.disabled : ""} 
-    `}
+        ${disabled ? styles.disabled : ""}`}
       style={stylesCustom}
     >
       {children}

@@ -2,7 +2,8 @@ import { FC } from "react";
 import { ISprint } from "../../../../types/ITodos";
 import styles from "./CardSprint.module.css";
 import { Button } from "../../Button/Button";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { IconPencil, IconTrash } from "@tabler/icons-react";
 
 type ICardSprint = {
   sprint: ISprint;
@@ -16,9 +17,16 @@ export const CardSprint: FC<ICardSprint> = ({
   openSprintModal,
 }) => {
   const navigate = useNavigate();
-
+  const location = useLocation();
   return (
-    <div className={styles.card}>
+    <div
+      className={`${styles.card} ${
+        location.pathname === `/sprint/${sprint.id}` ? styles.cardActive : ""
+      }`}
+      onClick={() => {
+        navigate(`/sprint/${sprint.id}`);
+      }}
+    >
       <div className={styles.cardContent}>
         <h3 className={styles.cardTitle}>{sprint.nombre}</h3>
         <p className={styles.cardDate}>
@@ -29,14 +37,19 @@ export const CardSprint: FC<ICardSprint> = ({
         </p>
       </div>
       <div className={styles.cardButtons}>
-        <Button type="info" onClick={() => openSprintModal(sprint)}>
-          Editar
+        <Button
+          stylesCustom={{ width: "3vh", height: "3vh", padding: "2px 4px" }}
+          type="info"
+          handleonClick={() => openSprintModal(sprint)}
+        >
+          <IconPencil />
         </Button>
-        <Button type="error" onClick={() => handleDeleteSprint(sprint.id)}>
-          Eliminar
-        </Button>
-        <Button type="warning" onClick={() => navigate(`/sprint/${sprint.id}`)}>
-          Ir al sprint
+        <Button
+          stylesCustom={{ width: "3vh", height: "3vh", padding: "2px 4px" }}
+          type="error"
+          handleonClick={() => handleDeleteSprint(sprint.id)}
+        >
+          <IconTrash />
         </Button>
       </div>
     </div>

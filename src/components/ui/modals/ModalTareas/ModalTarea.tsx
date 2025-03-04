@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ITarea } from "../../../../types/ITodos";
+import { useNavigate } from "react-router-dom";
 
 interface TareaModalProps {
   isOpen: boolean;
@@ -29,8 +30,9 @@ const TareaModal: React.FC<TareaModalProps> = ({
     descripcion: "",
     estado: "pendiente", // Asegúrate de definir IEstado
     fechaLimite: "",
-    color: "#ffffff",
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (initialData) {
@@ -42,7 +44,6 @@ const TareaModal: React.FC<TareaModalProps> = ({
         descripcion: "",
         estado: "pendiente",
         fechaLimite: "",
-        color: "#ffffff",
       });
     }
   }, [initialData]);
@@ -95,15 +96,14 @@ const TareaModal: React.FC<TareaModalProps> = ({
           onChange={handleChange}
           style={styles.input}
         />
-        <input
-          type="color"
-          name="color"
-          value={tarea.color}
-          onChange={handleChange}
-          style={styles.input}
-        />
         <div style={styles.actions}>
-          <button onClick={onClose} style={styles.button}>
+          <button
+            onClick={() => {
+              navigate(-1);
+              onClose();
+            }}
+            style={styles.button}
+          >
             Cancelar
           </button>
           <button onClick={handleSubmit} style={styles.button}>

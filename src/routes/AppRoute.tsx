@@ -1,18 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { BacklogScreen } from "../components/screens/BacklogScreen/BacklogScreen";
-import { SprintsScreen } from "../components/screens/SprintsScreen/SprintsScreen";
 import { SprintScreen } from "../components/screens/SprintScreen/SprintScreen";
 import { Header } from "../components/ui/Header/Header";
 import { Sidebar } from "../components/ui/Sidebar/Sidebar";
+
 export const AppRoute = () => {
   return (
     <Router>
       <Header />
-      <div style={{ display: "grid", gridTemplateColumns: "15vw 85vw" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "20vw 80vw" }}>
         <Sidebar />
         <Routes>
-          <Route path="/" element={<BacklogScreen />} />
-          <Route path="/sprints" element={<SprintsScreen />} />
+          {/* La ruta base puede recibir un idTarea opcional */}
+          <Route path="/:idTarea?" element={<BacklogScreen />} />
+
+          {/* La ruta del sprint con idSprint obligatorio e idTarea opcional */}
           <Route
             path="/sprint/:idSprint/:idTarea?"
             element={<SprintScreen />}

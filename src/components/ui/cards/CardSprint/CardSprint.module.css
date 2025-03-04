@@ -1,28 +1,34 @@
 .card {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  gap: 18px;
-  padding: 1.5rem;
+  padding: 1rem;
+  width: 95%;
   border-radius: 0.6rem;
   background-color: var(--primary-dark);
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease-in-out;
+}
+
+.cardActive {
+  background-color: var(--primary-shadow);
+}
+.card:hover {
+  background-color: var(--primary-shadow);
+  cursor: pointer;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
 }
 
 .cardContent {
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6px;
 }
 
 .cardTitle {
   font-size: 1.2rem;
   font-weight: bold;
-  text-align: center;
 }
 
 .cardDate {
@@ -31,6 +37,7 @@
 
 .cardButtons {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
 }

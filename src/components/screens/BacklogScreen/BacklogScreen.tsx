@@ -6,6 +6,7 @@ import { CardTareasBacklog } from "../../ui/cards/CardTareasBacklog/CardTareasBa
 import { getAllSprints } from "../../../http/sprints";
 import styles from "./BacklogScreen.module.css";
 import { Button } from "../../ui/Button/Button";
+import { IconPlaylistAdd } from "@tabler/icons-react";
 export const BacklogScreen = () => {
   const {
     handleGetTodosBacklog,
@@ -43,10 +44,10 @@ export const BacklogScreen = () => {
   return (
     <div className={styles.containerBacklogScreen}>
       <h1>Backlog</h1>
-      <div  className={styles.containerTitleAndButton}>
+      <div className={styles.containerTitleAndButton}>
         <h2>Tareas en el backlog</h2>
-        <Button type="info" onClick={() => openModal()}>
-          Crear Tarea
+        <Button type="info" handleonClick={() => openModal()}>
+          Crear tarea <IconPlaylistAdd />
         </Button>
       </div>
       <div className={styles.containerListTareas}>
@@ -58,6 +59,7 @@ export const BacklogScreen = () => {
             openModal={openModal}
             sendToSprintById={sendToSprintById}
             handleDeleteTodo={handleDeleteTodo}
+            isBacklog={true}
           />
         ))}
       </div>

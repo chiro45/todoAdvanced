@@ -22,7 +22,6 @@ export const ModalSprint: React.FC<SprintModalProps> = ({
     fechaCierre: "",
     nombre: "",
     tareas: [],
-    color: "#ffffff",
   });
 
   useEffect(() => {
@@ -35,7 +34,6 @@ export const ModalSprint: React.FC<SprintModalProps> = ({
         fechaCierre: "",
         nombre: "",
         tareas: [],
-        color: "#ffffff",
       });
     }
   }, [initialData]);
@@ -85,13 +83,7 @@ export const ModalSprint: React.FC<SprintModalProps> = ({
           onChange={handleChange}
           style={styles.input}
         />
-        <input
-          type="color"
-          name="color"
-          value={sprint.color}
-          onChange={handleChange}
-          style={styles.input}
-        />
+       
         <div style={styles.actions}>
           <button onClick={onClose} style={styles.button}>
             Cancelar
