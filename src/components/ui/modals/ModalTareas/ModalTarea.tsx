@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { ITarea } from "../../../../types/ITodos";
 import styles from "./ModalTareas.module.css";
 import { ModalBase } from "../ModalBase/ModalBase";
+import { InputField } from "../../Input/Input";
+import { TexArea } from "../../TextArea/TexArea";
+import { Button } from "../../Button/Button";
 interface TareaModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -49,6 +52,7 @@ const TareaModal: React.FC<TareaModalProps> = ({
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    console.log(e);
     setTarea({ ...tarea, [e.target.name]: e.target.value });
   };
 
@@ -72,40 +76,40 @@ const TareaModal: React.FC<TareaModalProps> = ({
     <ModalBase>
       <div className={styles.modal}>
         <h2>{initialData ? "Editar Tarea" : "Crear Tarea"}</h2>
-        <input
-          type="text"
-          name="titulo"
+        <InputField
+          type={"text"}
+          name={"titulo"}
           value={tarea.titulo}
-          onChange={handleChange}
+          handleChange={handleChange}
           className={styles.input}
           placeholder="Título"
         />
-        <textarea
+        <TexArea
           name="descripcion"
           value={tarea.descripcion}
-          onChange={handleChange}
+          handleChange={handleChange}
           className={styles.input}
           placeholder="Descripción"
         />
-        <input
+        <InputField
           type="date"
           name="fechaLimite"
           value={tarea.fechaLimite}
-          onChange={handleChange}
+          handleChange={handleChange}
           className={styles.input}
         />
         <div className={styles.actions}>
-          <button
-            onClick={() => {
+          <Button
+            handleonClick={() => {
               onClose();
             }}
-            className={styles.button}
+            type="error"
           >
             Cancelar
-          </button>
-          <button onClick={handleSubmit} className={styles.button}>
+          </Button>
+          <Button type="success" handleonClick={handleSubmit}>
             Guardar
-          </button>
+          </Button>
         </div>
       </div>
     </ModalBase>

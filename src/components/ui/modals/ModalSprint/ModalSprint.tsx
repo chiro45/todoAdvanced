@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { ISprint } from "../../../../types/ITodos";
 import styles from "./ModalSprint.module.css";
 import { ModalBase } from "../ModalBase/ModalBase";
+import { InputField } from "../../Input/Input";
+import { Button } from "../../Button/Button";
 interface SprintModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -62,47 +64,37 @@ export const ModalSprint: React.FC<SprintModalProps> = ({
     <ModalBase>
       <div className={styles.modal}>
         <h2>{initialData ? "Editar Sprint" : "Crear Sprint"}</h2>
-        <input
-          type="text"
-          name="nombre"
-          placeholder="Inserte un nombre"
+        <InputField
+          type={"text"}
+          name={"nombre"}
+          placeholder={"Inserte un nombre"}
           value={sprint.nombre}
-          onChange={handleChange}
+          handleChange={handleChange}
           className={styles.input}
         />
-        <input
-          type="date"
-          name="fechaInicio"
+        <InputField
+          type={"date"}
+          name={"fechaInicio"}
           value={sprint.fechaInicio}
-          onChange={handleChange}
+          handleChange={handleChange}
           className={styles.input}
         />
-        <input
-          type="date"
-          name="fechaCierre"
+        <InputField
+          type={"date"}
+          name={"fechaCierre"}
           value={sprint.fechaCierre}
-          onChange={handleChange}
+          handleChange={handleChange}
           className={styles.input}
         />
 
         <div className={styles.actions}>
-          <button onClick={onClose} className={styles.button}>
+          <Button type="error" handleonClick={onClose}>
             Cancelar
-          </button>
-          {initialData ? (
-            <>
-              <button onClick={handleDelete} className={styles.button}>
-                Eliminar
-              </button>
-              <button onClick={handleSubmit} className={styles.button}>
-                Actualizar
-              </button>
-            </>
-          ) : (
-            <button onClick={handleSubmit} className={styles.button}>
-              Guardar
-            </button>
-          )}
+          </Button>
+
+          <Button type="info" handleonClick={handleSubmit}>
+            Actualizar
+          </Button>
         </div>
       </div>
     </ModalBase>

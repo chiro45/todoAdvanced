@@ -73,7 +73,11 @@ export const SprintScreen = () => {
       <h1>Nombre de la sprint: {sprintName}</h1>
       <div className={styles.containerTitleAndButton}>
         <h2>Tareas en la sprint</h2>
-        <Button type="info" handleonClick={() => openModal()}>
+        <Button
+          stylesCustom={{ marginTop: "-1rem" }}
+          type="info"
+          handleonClick={() => openModal()}
+        >
           Crear tarea <IconPlaylistAdd />
         </Button>
       </div>

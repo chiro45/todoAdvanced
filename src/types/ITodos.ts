@@ -5,7 +5,7 @@ export interface ITarea {
   titulo: string;
   descripcion?: string;
   estado: IEstado;
-  fechaLimite: string;
+  fechaLimite?: string;
   color?: string;
 }
 

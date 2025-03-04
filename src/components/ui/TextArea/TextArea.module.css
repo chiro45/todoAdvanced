@@ -1,0 +1,18 @@
+.textarea {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+  resize: vertical; /* Permite ajustar el tamaño verticalmente */
+  min-height: 100px; /* Altura mínima */
+  max-height: 200px; /* Altura máxima */
+}
+
+.textarea:focus {
+  border-color: #007bff;
+  background-color: #f8f9fa;
+}

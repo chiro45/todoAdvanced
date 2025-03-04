@@ -22,7 +22,7 @@
             "id": "",
             "titulo": "Tarea 1",
             "descripcion": "Estamos aca",
-            "estado": "pendiente",
+            "estado": "completado",
             "fechaLimite": "2025-03-05"
           },
           {
@@ -36,7 +36,7 @@
             "id": "1a647a89-796b-454b-98a6-653514685b72",
             "titulo": "Tarea 1",
             "descripcion": "Estamos aca",
-            "estado": "completado",
+            "estado": "en_progreso",
             "fechaLimite": "2025-03-05"
           },
           {

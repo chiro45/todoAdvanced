@@ -60,7 +60,10 @@ export const BacklogScreen = () => {
       <h1>Backlog</h1>
       <div className={styles.containerTitleAndButton}>
         <h2>Tareas en el backlog</h2>
-        <Button type="info" handleonClick={() => openModal()}>
+        <Button
+          type="info"
+          handleonClick={() => openModal()}
+        >
           Crear tarea <IconPlaylistAdd />
         </Button>
       </div>
@@ -83,7 +86,6 @@ export const BacklogScreen = () => {
           fields={fields}
           handleCloseModal={closeView}
           data={selectedTarea}
-          widthParam={20}
         />
       )}
       <TareaModal

@@ -1,7 +1,8 @@
 .containerBacklogScreen {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  justify-content: center;
+  align-items: center;
   gap: 20px;
 }
 
@@ -9,22 +10,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 15px;
 }
 
 .containerListTareas {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 480px);
   gap: 20px;
-  width: 100%;
+  width: 98%;
+  overflow-y: auto;
 }
 
 .column {
   background-color: var(--primary-shadow);
   padding: 15px;
+  width: 100%;
   border-radius: 8px;
   min-height: 76vh;
   max-height: 76.5vh;
-  overflow-y: auto;
 }
 
 .column h3 {
