@@ -10,6 +10,8 @@ import { useParams } from "react-router-dom";
 import { CardTareasSprint } from "../../ui/cards/CardsTareasSprint/CardTareasSprint";
 import { useSprintStore } from "../../../store/sprintStore";
 import { ModalInfo } from "../../ui/modals/ModalInfo/ModalInfo";
+import { todoStore } from "../../../store/todoStore";
+import { useShallow } from "zustand/shallow";
 
 const fields: any = [
   { label: "Título", key: "titulo" },
@@ -38,7 +40,12 @@ export const SprintScreen = () => {
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openModalView, setOpenModalView] = useState(false);
-  const [selectedTarea, setSelectedTarea] = useState<ITarea | null>(null);
+    const { setTodoActive, todoActive } = todoStore(
+      useShallow((state) => ({
+        todoActive: state.todoActive,
+        setTodoActive: state.setTodoActive,
+      }))
+    );
 
   const sprintName = useSprintStore((state) => state.sprintName);
 
@@ -50,23 +57,24 @@ export const SprintScreen = () => {
   }, [idSprint]);
 
   const openModal = (tarea?: ITarea) => {
-    setSelectedTarea(tarea || null);
+    setTodoActive(tarea || null);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedTarea(null);
+    setTodoActive(null);
   };
 
   const openView = (tarea: ITarea) => {
-    setSelectedTarea(tarea);
+    setTodoActive(tarea);
     setOpenModalView(true);
   };
   const closeView = () => {
-    setSelectedTarea(null);
+    setTodoActive(null);
     setOpenModalView(false);
   };
+
 
   return (
     <div className={styles.containerBacklogScreen}>
@@ -140,19 +148,18 @@ export const SprintScreen = () => {
         </div>
       </div>
 
-      {openModalView && selectedTarea && (
+      {openModalView && todoActive && (
         <ModalInfo<ITarea>
           title={"Detalle Tarea"}
           fields={fields}
           handleCloseModal={closeView}
-          data={selectedTarea}
+          data={todoActive}
         />
       )}
 
       <TareaModal
         isOpen={isModalOpen}
         onClose={closeModal}
-        initialData={selectedTarea}
         isBacklog={true}
         handleCreateTodoBySprintId={handleCreateTodoBySprintId}
         handleUpdateTodoBySprintId={handleUpdateTodoBySprintId}

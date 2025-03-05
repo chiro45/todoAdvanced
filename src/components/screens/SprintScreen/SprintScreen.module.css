@@ -28,6 +28,7 @@
   border-radius: 8px;
   min-height: 76vh;
   max-height: 76.5vh;
+  overflow-y: auto;
 }
 
 .column h3 {

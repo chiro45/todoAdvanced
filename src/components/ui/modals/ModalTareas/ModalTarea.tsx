@@ -5,10 +5,10 @@ import { ModalBase } from "../ModalBase/ModalBase";
 import { InputField } from "../../Input/Input";
 import { TexArea } from "../../TextArea/TexArea";
 import { Button } from "../../Button/Button";
+import { todoStore } from "../../../../store/todoStore";
 interface TareaModalProps {
   isOpen: boolean;
   onClose: () => void;
-  initialData?: ITarea | null;
   isBacklog: boolean;
   createTareaBacklog?: (tarea: ITarea) => void;
   updateTareaByIdBacklog?: (tarea: ITarea) => void;
@@ -17,65 +17,59 @@ interface TareaModalProps {
   handleUpdateTodoBySprintId?: (tarea: ITarea) => void;
 }
 
+const initialState: ITarea = {
+  id: "",
+  titulo: "",
+  descripcion: "",
+  estado: "pendiente",
+  fechaLimite: "",
+};
+
 const TareaModal: React.FC<TareaModalProps> = ({
   isOpen,
   onClose,
-  initialData,
   isBacklog,
   createTareaBacklog,
   updateTareaByIdBacklog,
   handleCreateTodoBySprintId,
   handleUpdateTodoBySprintId,
 }) => {
-  const [tarea, setTarea] = useState<ITarea>({
-    id: "",
-    titulo: "",
-    descripcion: "",
-    estado: "pendiente", // Asegúrate de definir IEstado
-    fechaLimite: "",
-  });
-
+  const [tarea, setTarea] = useState<ITarea>(initialState);
+  const todoActive = todoStore((state) => state.todoActive);
   useEffect(() => {
-    if (initialData) {
-      setTarea(initialData);
+    if (todoActive) {
+      setTarea(todoActive);
     } else {
-      setTarea({
-        id: "",
-        titulo: "",
-        descripcion: "",
-        estado: "pendiente",
-        fechaLimite: "",
-      });
+      setTarea(initialState);
     }
-  }, [initialData]);
+  }, [todoActive]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    console.log(e);
     setTarea({ ...tarea, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = () => {
     if (!tarea.titulo || !tarea.fechaLimite) return;
     if (isBacklog && updateTareaByIdBacklog && createTareaBacklog) {
-      initialData ? updateTareaByIdBacklog(tarea) : createTareaBacklog(tarea);
+      todoActive ? updateTareaByIdBacklog(tarea) : createTareaBacklog(tarea);
     } else {
       if (handleUpdateTodoBySprintId && handleCreateTodoBySprintId) {
-        initialData
+        todoActive
           ? handleUpdateTodoBySprintId(tarea)
           : handleCreateTodoBySprintId(tarea);
       }
     }
+    setTarea(initialState);
     onClose();
   };
 
   if (!isOpen) return null;
-
   return (
     <ModalBase>
       <div className={styles.modal}>
-        <h2>{initialData ? "Editar Tarea" : "Crear Tarea"}</h2>
+        <h2>{todoActive ? "Editar Tarea" : "Crear Tarea"}</h2>
         <InputField
           type={"text"}
           name={"titulo"}

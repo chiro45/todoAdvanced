@@ -7,10 +7,14 @@ interface ITodoStore {
   addNew: (newTodo: ITarea) => void;
   editTodo: (updatedTask: Partial<ITarea>) => void;
   deleteTodo: (id: string) => void;
+  setTodoActive: (tarea: ITarea | null) => void;
+  todoActive: ITarea | null;
 }
 
 export const todoStore = create<ITodoStore>((set) => ({
   todos: [],
+  todoActive: null,
+  setTodoActive: (todo) => set(() => ({ todoActive: todo })),
   setTodos: (newArrTodos) => set(() => ({ todos: newArrTodos })),
   addNew: (newTodo) =>
     set((state) => ({

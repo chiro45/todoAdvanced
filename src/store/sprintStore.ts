@@ -9,11 +9,16 @@ interface ISprintsStore {
   deleteSprintZustand: (id: string) => void;
   sprintName: string | null;
   setSprintName: (param: string | null) => void;
+  sprintActive: ISprint | null;
+  setSprintActive: (param: ISprint | null) => void;
 }
 
 export const useSprintStore = create<ISprintsStore>((set) => ({
   sprints: [],
+  sprintActive: null,
   sprintName: null,
+  setSprintActive: (sprintActive) =>
+    set(() => ({ sprintActive: sprintActive })),
   setSprintName: (nameSprint) => set(() => ({ sprintName: nameSprint })),
   setSprintsZustand: (newArrSprints) => set(() => ({ sprints: newArrSprints })),
   addNewSprintZustand: (newSprint) =>

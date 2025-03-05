@@ -3,10 +3,31 @@
     "tareas": [
       {
         "id": "dcec0ad4-31e0-4279-8ccf-72bd1f20b52d",
-        "titulo": "1",
-        "descripcion": "1",
+        "titulo": "Tarea backlog",
+        "descripcion": "Descripcion tarea backlog",
         "estado": "pendiente",
         "fechaLimite": "2025-03-05"
+      },
+      {
+        "id": "56b59536-83dc-4d07-82ca-b1b5b1fc2621",
+        "titulo": "Tarea 1",
+        "descripcion": "Estamos aca",
+        "estado": "pendiente",
+        "fechaLimite": "2025-03-05"
+      },
+      {
+        "id": "7bcca546-98db-4117-8e31-e7fd55d3b1bf",
+        "titulo": "Tarea 1",
+        "descripcion": "Estamos aca",
+        "estado": "pendiente",
+        "fechaLimite": "2025-03-05"
+      },
+      {
+        "id": "ed8ce1cc-818e-47f0-8a50-0a3acbbd9a36",
+        "titulo": "Tarea 1",
+        "descripcion": "222",
+        "estado": "pendiente",
+        "fechaLimite": "2025-03-08"
       }
     ]
   },
@@ -16,15 +37,8 @@
         "id": "b0e3f34b-68c6-49eb-b059-ab251ed81629",
         "fechaInicio": "2025-03-04",
         "fechaCierre": "2025-03-11",
-        "nombre": "Sprint 1",
+        "nombre": "Sprint 122",
         "tareas": [
-          {
-            "id": "",
-            "titulo": "Tarea 1",
-            "descripcion": "Estamos aca",
-            "estado": "completado",
-            "fechaLimite": "2025-03-05"
-          },
           {
             "id": "50699dec-3d1a-45ff-a94d-82d416eac053",
             "titulo": "Tarea 2",
@@ -33,18 +47,25 @@
             "fechaLimite": "2025-03-06"
           },
           {
-            "id": "1a647a89-796b-454b-98a6-653514685b72",
-            "titulo": "Tarea 1",
-            "descripcion": "Estamos aca",
-            "estado": "en_progreso",
-            "fechaLimite": "2025-03-05"
-          },
-          {
             "id": "29e5666c-f1cb-4974-b34b-f93a0b83c659",
-            "titulo": "1",
-            "descripcion": "1",
+            "titulo": "Tarea 1",
+            "descripcion": "Tarea 2",
             "estado": "pendiente",
             "fechaLimite": "2025-03-04"
+          },
+          {
+            "id": "d5495c0d-7490-41b4-b6de-3bd7bdbbbc6e",
+            "titulo": "Tarea 1",
+            "descripcion": "123123",
+            "estado": "pendiente",
+            "fechaLimite": "2025-03-01"
+          },
+          {
+            "id": "95b2176d-24f5-4487-9a04-acb33470cc38",
+            "titulo": "asd",
+            "descripcion": "213123",
+            "estado": "pendiente",
+            "fechaLimite": "2025-03-06"
           }
         ]
       }

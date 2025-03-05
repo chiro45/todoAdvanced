@@ -8,6 +8,8 @@ import { Button } from "../../ui/Button/Button";
 import { IconPlaylistAdd } from "@tabler/icons-react";
 import { useSprints } from "../../../hooks/useSprints";
 import { ModalInfo } from "../../ui/modals/ModalInfo/ModalInfo";
+import { todoStore } from "../../../store/todoStore";
+import { useShallow } from "zustand/shallow";
 
 const fields: any = [
   { label: "Título", key: "titulo" },
@@ -28,7 +30,13 @@ export const BacklogScreen = () => {
   const { handleGetAllSprints, sprints } = useSprints();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTarea, setSelectedTarea] = useState<ITarea | null>(null);
+
+  const { setTodoActive, todoActive } = todoStore(
+    useShallow((state) => ({
+      todoActive: state.todoActive,
+      setTodoActive: state.setTodoActive,
+    }))
+  );
 
   useEffect(() => {
     handleGetAllSprints();
@@ -36,22 +44,22 @@ export const BacklogScreen = () => {
   }, []);
 
   const openModal = (tarea?: ITarea) => {
-    setSelectedTarea(tarea || null);
+    setTodoActive(tarea || null);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedTarea(null);
+    setTodoActive(null);
   };
   const [openModalView, setOpenModalView] = useState(false);
 
   const openView = (tarea: ITarea) => {
-    setSelectedTarea(tarea);
+    setTodoActive(tarea);
     setOpenModalView(true);
   };
   const closeView = () => {
-    setSelectedTarea(null);
+    setTodoActive(null);
     setOpenModalView(false);
   };
 
@@ -60,10 +68,7 @@ export const BacklogScreen = () => {
       <h1>Backlog</h1>
       <div className={styles.containerTitleAndButton}>
         <h2>Tareas en el backlog</h2>
-        <Button
-          type="info"
-          handleonClick={() => openModal()}
-        >
+        <Button type="info" handleonClick={() => openModal()}>
           Crear tarea <IconPlaylistAdd />
         </Button>
       </div>
@@ -80,18 +85,17 @@ export const BacklogScreen = () => {
           />
         ))}
       </div>
-      {openModalView && selectedTarea && (
+      {openModalView && todoActive && (
         <ModalInfo<ITarea>
           title={"Detalle Tarea"}
           fields={fields}
           handleCloseModal={closeView}
-          data={selectedTarea}
+          data={todoActive}
         />
       )}
       <TareaModal
         isOpen={isModalOpen}
         onClose={closeModal}
-        initialData={selectedTarea}
         isBacklog={true}
         createTareaBacklog={handleCreateTodo}
         updateTareaByIdBacklog={handleUpdateTodoBacklog}

@@ -8,6 +8,8 @@ import { CardSprint } from "../cards/CardSprint/CardSprint";
 import { ModalSprint } from "../modals/ModalSprint/ModalSprint";
 import { Button } from "../Button/Button";
 import { ModalInfo } from "../modals/ModalInfo/ModalInfo";
+import { useSprintStore } from "../../../store/sprintStore";
+import { useShallow } from "zustand/shallow";
 
 const fields: any = [
   { label: "Nombre", key: "nombre" },
@@ -27,21 +29,26 @@ export const Sidebar = () => {
   } = useSprints();
 
   const [isSprintModalOpen, setIsSprintModalOpen] = useState(false);
-  const [selectedSprint, setSelectedSprint] = useState<ISprint | null>(null);
   const [openModalView, setOpenModalView] = useState(false);
+  const { sprintActive, setSprintActive } = useSprintStore(
+    useShallow((state) => ({
+      sprintActive: state.sprintActive,
+      setSprintActive: state.setSprintActive,
+    }))
+  );
 
   useEffect(() => {
     handleGetAllSprints();
   }, []);
 
   const openSprintModal = (sprint?: ISprint) => {
-    setSelectedSprint(sprint || null);
+    setSprintActive(sprint || null);
     setIsSprintModalOpen(true);
   };
 
   const closeSprintModal = () => {
     setIsSprintModalOpen(false);
-    setSelectedSprint(null);
+    setSprintActive(null);
   };
 
   const handleSaveSprint = (sprint: ISprint) => {
@@ -50,14 +57,15 @@ export const Sidebar = () => {
     } else {
       handleCreateSprint(sprint); // Si no tiene id, crear
     }
+    setSprintActive(null);
   };
 
   const openView = (sprint: ISprint) => {
-    setSelectedSprint(sprint);
+    setSprintActive(sprint);
     setOpenModalView(true);
   };
   const closeView = () => {
-    setSelectedSprint(null);
+    setSprintActive(null);
     setOpenModalView(false);
   };
 
@@ -106,21 +114,17 @@ export const Sidebar = () => {
           ))}
         </div>
       </div>
-      {openModalView && selectedSprint && (
+      {openModalView && sprintActive && (
         <ModalInfo<ISprint>
           title={"Detalle Sprint"}
           fields={fields}
           handleCloseModal={closeView}
-          data={selectedSprint}
+          data={sprintActive}
         />
       )}
-      <ModalSprint
-        isOpen={isSprintModalOpen}
-        onClose={closeSprintModal}
-        initialData={selectedSprint}
-        onSave={handleSaveSprint}
-        onDelete={handleDeleteSprint}
-      />
+      {isSprintModalOpen && (
+        <ModalSprint onClose={closeSprintModal} onSave={handleSaveSprint} />
+      )}
     </div>
   );
 };

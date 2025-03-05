@@ -4,66 +4,55 @@ import styles from "./ModalSprint.module.css";
 import { ModalBase } from "../ModalBase/ModalBase";
 import { InputField } from "../../Input/Input";
 import { Button } from "../../Button/Button";
+import { useSprintStore } from "../../../../store/sprintStore";
 interface SprintModalProps {
-  isOpen: boolean;
   onClose: () => void;
   onSave: (sprint: ISprint) => void;
-  onDelete: (id: string) => void;
-  initialData?: ISprint | null;
 }
 
+const initialData: ISprint = {
+  id: "",
+  fechaInicio: "",
+  fechaCierre: "",
+  nombre: "",
+  tareas: [],
+};
+
 export const ModalSprint: React.FC<SprintModalProps> = ({
-  isOpen,
   onClose,
   onSave,
-  onDelete,
-  initialData,
 }) => {
-  const [sprint, setSprint] = useState<ISprint>({
-    id: "",
-    fechaInicio: "",
-    fechaCierre: "",
-    nombre: "",
-    tareas: [],
-  });
+  const sprintActive = useSprintStore((state) => state.sprintActive);
+
+  const [sprint, setSprint] = useState<ISprint>(initialData);
 
   useEffect(() => {
-    if (initialData) {
-      setSprint(initialData);
-    } else {
-      setSprint({
-        id: "",
-        fechaInicio: "",
-        fechaCierre: "",
-        nombre: "",
-        tareas: [],
-      });
-    }
-  }, [initialData]);
+    console.log("hola", sprintActive);
+    if (sprintActive) {
+      console.log("hola1", sprintActive);
 
+      setSprint(sprintActive);
+    } else {
+      console.log("hola2", sprintActive);
+
+      setSprint(initialData);
+    }
+  }, [sprintActive]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSprint({ ...sprint, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = () => {
     if (!sprint.fechaInicio || !sprint.fechaCierre) return;
-    onSave(sprint); // onSave maneja tanto crear como actualizar
+    onSave(sprint);
     onClose();
   };
 
-  const handleDelete = () => {
-    if (sprint.id) {
-      onDelete(sprint.id); // Eliminar sprint si existe un id
-      onClose();
-    }
-  };
-
-  if (!isOpen) return null;
 
   return (
     <ModalBase>
       <div className={styles.modal}>
-        <h2>{initialData ? "Editar Sprint" : "Crear Sprint"}</h2>
+        <h2>{sprintActive !== null ? "Editar Sprint" : "Crear Sprint"}</h2>
         <InputField
           type={"text"}
           name={"nombre"}
@@ -93,7 +82,7 @@ export const ModalSprint: React.FC<SprintModalProps> = ({
           </Button>
 
           <Button type="info" handleonClick={handleSubmit}>
-            Actualizar
+            {sprintActive ? "Actualizar" : "Guardar"}
           </Button>
         </div>
       </div>
